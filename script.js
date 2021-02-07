@@ -5,7 +5,7 @@ const showFoodList = foods => {
     listDiv.innerHTML = "";
     foods.forEach(food => {
         const foodDiv = document.createElement("div");
-        foodDiv.className = "col-md-4 col-sm-6 mb-5";
+        foodDiv.className = "col-md-3 col-sm-6 mb-5";
 
         const foodInfo = `
                 <div onclick="showDetails('${food.idMeal}')" class="card h-100">
