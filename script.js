@@ -1,15 +1,10 @@
+// This Function displays the food name and image when searched 
 const showFoodList = foods => {
-    // console.log(foods.meals)
-
     const listDiv = document.getElementById("foodList");
     listDiv.className = "row"
     listDiv.innerHTML = "";
-
     foods.forEach(food => {
-
-        // console.log(food)
         const foodDiv = document.createElement("div");
-
         foodDiv.className = "col-md-4 col-sm-6 mb-5";
 
         const foodInfo = `
@@ -23,7 +18,6 @@ const showFoodList = foods => {
         foodDiv.innerHTML = foodInfo;
         listDiv.appendChild(foodDiv);
     });
-
 }
 // Search Button Handler
 document.getElementById("search-btn").addEventListener("click", function () {
@@ -53,6 +47,7 @@ const errorMessage =()=>{
     listDiv.innerHTML=message;
 }
 
+// This function renders food infos when clicked on food.
 const renderFoodInfo = food => {
     const foodDetailsDiv = document.getElementById("foodDetails");
     foodDetailsDiv.innerHTML = "";
@@ -80,11 +75,12 @@ const renderFoodInfo = food => {
         food[0].strMeasure20 + ' ' + food[0].strIngredient20
 
     ]
-    
+    // Retrieving the image for showing details 
     const img = document.createElement("img");
     img.setAttribute("src", `${food[0].strMealThumb}`);
     foodDetailsDiv.appendChild(img);
 
+    // creating a div for showing the food name in ingredients list
     const div = document.createElement("div");
     const heading = `
         <h3 class="card-title">${food[0].strMeal}</h3>
@@ -103,9 +99,7 @@ const renderFoodInfo = food => {
             p.innerHTML = `<i class="fas fa-check-square" style="color:#F06C4E;"></i> ${foodIngredients}`;
             foodDetailsDiv.appendChild(p); 
         }
-
     });
-
 }
 
 
