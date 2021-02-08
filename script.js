@@ -71,7 +71,7 @@ const renderFoodInfo = food => {
     // Listing Ingredients of the selected Food
     for(let i=1;i<=20;i++) {
         const content = `${food[`${`strMeasure${i}`}`]} ${food[`${`strIngredient${i}`}`]}`;
-        // const value = `${meal[`${`strMeasure${i}`}`]} ${meal[`${`strIngredient${i}`}`]}`;
+        
         if(content.length > 2  && content !== "null null"){
             const p = document.createElement("p");
             p.className = "list-group-item"
