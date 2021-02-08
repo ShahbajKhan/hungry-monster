@@ -35,7 +35,7 @@ const showDetails = meal => {
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal}`;   
     fetch(url)
         .then(res => res.json())
-        .then(data => renderFoodInfo(data.meals));
+        .then(data => renderFoodInfo(data.meals[0]));
 
 }
 // Error Handling- if food name is not available
@@ -51,39 +51,16 @@ const errorMessage =()=>{
 const renderFoodInfo = food => {
     const foodDetailsDiv = document.getElementById("foodDetails");
     foodDetailsDiv.innerHTML = "";
-    // Create Array for ingredients and measure
-    const ingredients = [
-        food[0].strMeasure1 + ' ' + food[0].strIngredient1,
-        food[0].strMeasure2 + ' ' + food[0].strIngredient2,
-        food[0].strMeasure3 + ' ' + food[0].strIngredient3,
-        food[0].strMeasure4 + ' ' + food[0].strIngredient4,
-        food[0].strMeasure5 + ' ' + food[0].strIngredient5,
-        food[0].strMeasure6 + ' ' + food[0].strIngredient6,
-        food[0].strMeasure7 + ' ' + food[0].strIngredient7,
-        food[0].strMeasure8 + ' ' + food[0].strIngredient8,
-        food[0].strMeasure9 + ' ' + food[0].strIngredient9,
-        food[0].strMeasure10 + ' ' + food[0].strIngredient10,
-        food[0].strMeasure11 + ' ' + food[0].strIngredient11,
-        food[0].strMeasure12 + ' ' + food[0].strIngredient12,
-        food[0].strMeasure13 + ' ' + food[0].strIngredient13,
-        food[0].strMeasure14 + ' ' + food[0].strIngredient14,
-        food[0].strMeasure15 + ' ' + food[0].strIngredient15,
-        food[0].strMeasure16 + ' ' + food[0].strIngredient16,
-        food[0].strMeasure17 + ' ' + food[0].strIngredient17,
-        food[0].strMeasure18 + ' ' + food[0].strIngredient18,
-        food[0].strMeasure19 + ' ' + food[0].strIngredient19,
-        food[0].strMeasure20 + ' ' + food[0].strIngredient20
-
-    ]
+    
     // Retrieving the image for showing details 
     const img = document.createElement("img");
-    img.setAttribute("src", `${food[0].strMealThumb}`);
+    img.setAttribute("src", `${food.strMealThumb}`);
     foodDetailsDiv.appendChild(img);
 
     // creating a div for showing the food name in ingredients list
     const div = document.createElement("div");
     const heading = `
-        <h3 class="card-title">${food[0].strMeal}</h3>
+        <h3 class="card-title">${food.strMeal}</h3>
         <hr>
         <h5>Ingredients</h5>
         <hr>
@@ -92,14 +69,16 @@ const renderFoodInfo = food => {
     foodDetailsDiv.appendChild(div);
     
     // Listing Ingredients of the selected Food
-    ingredients.forEach(foodIngredients => {
-        if(foodIngredients.length > 2  && foodIngredients !== "null null"){
+    for(let i=1;i<=20;i++) {
+        const content = `${food[`${`strMeasure${i}`}`]} ${food[`${`strIngredient${i}`}`]}`;
+        // const value = `${meal[`${`strMeasure${i}`}`]} ${meal[`${`strIngredient${i}`}`]}`;
+        if(content.length > 2  && content !== "null null"){
             const p = document.createElement("p");
             p.className = "list-group-item"
-            p.innerHTML = `<i class="fas fa-check-square" style="color:#F06C4E;"></i> ${foodIngredients}`;
+            p.innerHTML = `<i class="fas fa-check-square" style="color:#F06C4E;"></i> ${content}`;
             foodDetailsDiv.appendChild(p); 
         }
-    });
+    }
 }
 
 
